@@ -1,6 +1,24 @@
 import mongoose from "mongoose";
 
-// conexion local a la BD
+// // conexion a BD con callbacks
+// const dbConnect = () => {
+//   const MONGO_DB_URI = process.env.MONGO_DB_URI;
+//   mongoose.connect(MONGO_DB_URI, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true, 
+//   },
+//   (err, res) => {
+//     if (!err) {
+//       console.log('Conexion exitosa a la BD');
+//     } else {
+//       console.log('Error al conectar a la BD: ' + err);
+//       process.exit(1);
+//     }
+//   })
+// }
+
+
+// conexion a BD con try-catch
 const dbConnect = async () => {
   const MONGO_DB_URI = process.env.MONGO_DB_URI;
   const connectionParams = {
