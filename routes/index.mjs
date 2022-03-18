@@ -1,3 +1,7 @@
+/**
+ * Scanea los archivos de rutas para que se carguen desde el archivo principal
+ */
+
 import express from "express";
 const router = express.Router();
 import fs from "fs";
@@ -12,8 +16,10 @@ const PATH_ROUTES = __dirname;
 const removeExtension = (fileName) => {
     //TODO tracks.js [tracks, js]
     return fileName.split('.').shift(); // nombre del archivo sin extensión
+                                        // shift() obtiene el primer elemento de un arreglo
 }
 
+// carga modulo ES dimamicamente
 const loadModule = async (path) => {
     try {
         const module = await import(path);
@@ -28,8 +34,9 @@ const loadModule = async (path) => {
 const filesNames = fs.readdirSync(PATH_ROUTES);
 for (let file of filesNames) {
     const fileWithOutExtension = removeExtension(file);
-    const skip = ["index"].includes(fileWithOutExtension);  
-    if (!skip) {
+    // const skip = ["index"].includes(fileWithOutExtension);  
+    // if (!skip) {
+    if (fileWithOutExtension !== "index") {    
         const routesModule = await loadModule(`file:${PATH_ROUTES}/${file}`);
         // console.log(`modulo cargado ... ${fileWithOutExtension}`);
         router.use(`/${fileWithOutExtension}`, routesModule.router);

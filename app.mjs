@@ -11,6 +11,8 @@ import dbConnect from './config/mongo.mjs';
 const app = express();
 
 app.use(cors());
+app.use(express.json()); // permite recibir jsons
+app.use(express.static("storage")); // deja publicos los recursos en la carpeta storage   
 
 const port = process.env.PORT || 3000;
 
