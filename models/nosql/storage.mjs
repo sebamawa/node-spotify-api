@@ -13,4 +13,4 @@ const StorageSchema = new mongoose.Schema({
     versionKey: false,  
 });
 
-export default mongoose.model("users", StorageSchema);
+export default mongoose.model("storage", StorageSchema);

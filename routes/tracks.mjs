@@ -10,4 +10,5 @@ router.get("/:id", getItem);
 
 router.post("/", createItem);
 
-export { router };
+// export { router };
+export default router;

@@ -19,6 +19,6 @@ const storage = multer.diskStorage({
 });
 
 // multer se usa en un middleware
-const uploadMiddleware = multer({ storage });
+const uploadSingleFileMiddleware = multer({ storage });
 
-export { uploadMiddleware };
+export { uploadSingleFileMiddleware };

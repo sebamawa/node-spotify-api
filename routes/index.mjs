@@ -2,6 +2,7 @@
  * Scanea los archivos de rutas para que se carguen desde el archivo principal
  */
 
+import { Console } from "console";
 import express from "express";
 const router = express.Router();
 import fs from "fs";
@@ -39,7 +40,7 @@ for (let file of filesNames) {
     if (fileWithOutExtension !== "index") {    
         const routesModule = await loadModule(`file:${PATH_ROUTES}/${file}`);
         // console.log(`modulo cargado ... ${fileWithOutExtension}`);
-        router.use(`/${fileWithOutExtension}`, routesModule.router);
+        router.use(`/${fileWithOutExtension}`, routesModule.default);
     }
 }
 
