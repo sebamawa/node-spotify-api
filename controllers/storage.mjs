@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import storageModel from '../models/nosql/storage.mjs';
 const PUBLIC_URL = process.env.PUBLIC_URL;
 
@@ -27,15 +29,11 @@ const getItems = async (req, res) => {
  * @param {*} res
  */
 const createItem = async (req, res) => {
-
-    // const body = req.body;
     const { body, file } = req;
-    // console.log(file); 
     const fileData = {
         fileName: file.filename,
         url: `${PUBLIC_URL}/${file.filename}`
     }
-    console.log(PUBLIC_URL);
     console.log(fileData);
     const data = await storageModel.create(fileData);
     res.send({data});

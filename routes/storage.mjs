@@ -4,6 +4,7 @@ const router = express.Router();
 import { uploadMiddleware } from "../utils/handleStorage.mjs";
 import { getItems, getItem, createItem } from "../controllers/storage.mjs";	
 
-router.post("/", uploadMiddleware.single("miFile"), createItem);
+router.post("/", uploadMiddleware.single("myFile"), createItem);
+// router.post("/", createItem);
 
 export { router };
