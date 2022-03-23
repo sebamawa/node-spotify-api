@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongooseDelete from "mongoose-delete";
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -23,5 +24,7 @@ const UserSchema = new mongoose.Schema({
     timestamps: true, // TODO createAt, updateAt
     versionKey: false,  
 });
+
+UserSchema.plugin(mongooseDelete, { overrideMethods: "all" });
 
 export default mongoose.model("users", UserSchema);

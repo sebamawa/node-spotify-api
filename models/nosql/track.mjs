@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongooseDelete from "mongoose-delete"; // para borrado logico
 
 const TrackSchema = new mongoose.Schema({
     name: {
@@ -43,5 +44,7 @@ const TrackSchema = new mongoose.Schema({
     timestamps: true, // TODO createAt, updateAt
     versionKey: false,  
 });
+
+TrackSchema.plugin(mongooseDelete, { overrideMethods: "all" });
 
 export default mongoose.model("tracks", TrackSchema);

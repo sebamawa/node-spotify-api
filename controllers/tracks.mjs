@@ -15,8 +15,6 @@ const getItems = async (req, res) => {
     } catch (e) {
         handleHttpError(res, 'ERROR_GET_ITEMS', 403);
     }
-
-
 }
 
 /**
@@ -24,8 +22,14 @@ const getItems = async (req, res) => {
  * @param {*} req
  * @param {*} res
  */
- const getItem = (req, res) => {
-
+ const getItem = async (req, res) => {
+    try {
+        req = matchedData(req); // filtro el id
+        const data = await trackModel.findById(req.id);
+        res.send({data});
+    } catch (e) {
+        handleHttpError(res, "ERROR_GET_ITEM", 403);
+    }
  }
 
 /**
@@ -49,13 +53,32 @@ const createItem = async (req, res) => {
  * @param {*} req
  * @param {*} res
  */
-const updateItem = (req, res) => {}
+const updateItem = async (req, res) => {
+
+    try {
+        const {id, ...body} = matchedData(req); // extrae el id y el resto se guarda en body
+        const data = await trackModel.findOneAndUpdate(id, body);  //(req.params.id, body);
+        res.send({data});     
+    } catch (e) {
+        handleHttpError(res, 'ERROR_UPDATE_ITEM', 403);
+    }    
+}
 
 /**
  * Eliminar un registro
  * @param {*} req
  * @param {*} res
  */
-const deleteItem = (req, res) => {}
+const deleteItem = async (req, res) => {
+    try {
+        req = matchedData(req); // filtro el id
+        const {id} = req;
+        // const data = await trackModel.deleteOne({_id: id}); // borrado fisico de mongoose
+        const data = await trackModel.delete({_id: id}); // borrado logico de mongoose-delete
+        res.send({data});
+    } catch (e) {
+        handleHttpError(res, "ERROR_DELETE_ITEM", 403);
+    }    
+}
 
 export { getItems, getItem, createItem, updateItem, deleteItem };
