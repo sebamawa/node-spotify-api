@@ -13,7 +13,8 @@ const UserSchema = new mongoose.Schema({
         unique: true
     },
     password: {
-        type: String
+        type: String,
+        select: false // para no mostrar el password en la respuesta
     },
     role: {
         type: ["user", "admin"],

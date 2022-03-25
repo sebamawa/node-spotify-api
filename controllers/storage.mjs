@@ -4,7 +4,8 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { matchedData } from 'express-validator';
 dotenv.config();
-import storageModel from '../models/nosql/storage.mjs';
+// import storageModel from '../models/nosql/storage.mjs';
+import { storageModel } from '../models/index.mjs';
 import { handleHttpError } from '../utils/handleError.mjs';
 
 const PUBLIC_URL = process.env.PUBLIC_URL;

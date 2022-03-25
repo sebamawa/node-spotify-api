@@ -1,5 +1,6 @@
 import { matchedData } from 'express-validator';
-import trackModel from '../models/nosql/track.mjs';
+// import trackModel from '../models/nosql/track.mjs';
+import { tracksModel } from '../models/index.mjs';
 import { handleHttpError } from '../utils/handleError.mjs';
 
 /**
@@ -10,9 +11,10 @@ import { handleHttpError } from '../utils/handleError.mjs';
 const getItems = async (req, res) => {
 
     try {
-        const data = await trackModel.find({});
+        const data = await tracksModel.find({});
         res.send({data});
     } catch (e) {
+        console.log(e);
         handleHttpError(res, 'ERROR_GET_ITEMS', 403);
     }
 }
@@ -25,7 +27,7 @@ const getItems = async (req, res) => {
  const getItem = async (req, res) => {
     try {
         req = matchedData(req); // filtro el id
-        const data = await trackModel.findById(req.id);
+        const data = await tracksModel.findById(req.id);
         res.send({data});
     } catch (e) {
         handleHttpError(res, "ERROR_GET_ITEM", 403);
@@ -41,7 +43,7 @@ const createItem = async (req, res) => {
 
     try {
         const body = matchedData(req); // metodo de express-validator que elimina datos extra enviados por el cliente no validados   
-        const data = await trackModel.create(body);
+        const data = await tracksModel.create(body);
         res.send({data});     
     } catch (e) {
         handleHttpError(res, 'ERROR_CREATE_ITEM', 403);
@@ -57,7 +59,7 @@ const updateItem = async (req, res) => {
 
     try {
         const {id, ...body} = matchedData(req); // extrae el id y el resto se guarda en body
-        const data = await trackModel.findOneAndUpdate(id, body);  //(req.params.id, body);
+        const data = await tracksModel.findOneAndUpdate(id, body);  //(req.params.id, body);
         res.send({data});     
     } catch (e) {
         handleHttpError(res, 'ERROR_UPDATE_ITEM', 403);
@@ -74,7 +76,7 @@ const deleteItem = async (req, res) => {
         req = matchedData(req); // filtro el id
         const {id} = req;
         // const data = await trackModel.deleteOne({_id: id}); // borrado fisico de mongoose
-        const data = await trackModel.delete({_id: id}); // borrado logico de mongoose-delete
+        const data = await tracksModel.delete({_id: id}); // borrado logico de mongoose-delete
         res.send({data});
     } catch (e) {
         handleHttpError(res, "ERROR_DELETE_ITEM", 403);

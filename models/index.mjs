@@ -1,11 +1,13 @@
-import userModel from './user.mjs';
-import trackModel from './track.mjs';
-import storageModel from './storage.mjs';
+import usersModel from './nosql/users.mjs';
+import tracksModel from './nosql/track.mjs';
+import storageModel from './nosql/storage.mjs';
 
-const models = {
-    userModel,
-    trackModel,
-    storageModel
-}
+// const models = {
+//     usersModel,
+//     tracksModel,
+//     storageModel
+// }
 
-export default models;
+// export default models;
+
+export {usersModel, tracksModel, storageModel};

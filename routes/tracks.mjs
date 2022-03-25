@@ -2,7 +2,6 @@ import express from "express";
 import { getItems, getItem, createItem, updateItem, deleteItem } from "../controllers/tracks.mjs";
 const router = express.Router();
 import { validatorCreateItem, validatorGetItem } from "../validators/tracks.mjs";
-import { customHeader } from "../middleware/customHeader.mjs";
 
 //TODO http://localhost:3000/tracks GET, POST, DELETE, PUT
 
