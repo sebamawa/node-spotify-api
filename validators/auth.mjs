@@ -28,8 +28,7 @@ const validatorRegister = [
 const validatorLogin = [
     check("password")
     .exists()
-    .notEmpty()
-    .isEmail(),
+    .notEmpty(),
     check("email")
     .exists()
     .notEmpty()
