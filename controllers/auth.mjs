@@ -67,8 +67,7 @@ const loginController = async (req, res) => {
         res.send({ data });
     } catch (error) {
         console.log(error);
-        let messages = { message1: 'ERROR_LOGIN_USER' };
-        
+        handleHttpError(res, 'ERROR_LOGIN_USER', 401);
     }
 }
 
